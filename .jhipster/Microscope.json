@@ -1,0 +1,35 @@
+{
+  "name": "Microscope",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "microscopePicture",
+      "otherEntityRelationshipName": "microscope",
+      "relationshipName": "microscopePicture"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "rock",
+      "otherEntityRelationshipName": "microscope",
+      "relationshipName": "rock",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201124190055",
+  "entityTableName": "microscope",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

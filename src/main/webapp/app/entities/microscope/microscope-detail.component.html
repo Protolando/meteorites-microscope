@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="microscope">
+            <h2><span jhiTranslate="meteoritesMicroscopeApp.microscope.detail.title">Microscope</span> {{ microscope.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="meteoritesMicroscopeApp.microscope.name">Name</span></dt>
+                <dd>
+                    <span>{{ microscope.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="meteoritesMicroscopeApp.microscope.rock">Rock</span></dt>
+                <dd>
+                    <div *ngIf="microscope.rock">
+                        <a [routerLink]="['/rock', microscope.rock?.id, 'view']">{{ microscope.rock?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/microscope', microscope.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

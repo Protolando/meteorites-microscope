@@ -1,0 +1,24 @@
+{
+  "meteoritesMicroscopeApp": {
+    "microscope": {
+      "home": {
+        "title": "Microscopes",
+        "createLabel": "Create a new Microscope",
+        "createOrEditLabel": "Create or edit a Microscope",
+        "notFound": "No Microscopes found"
+      },
+      "created": "A new Microscope is created with identifier {{ param }}",
+      "updated": "A Microscope is updated with identifier {{ param }}",
+      "deleted": "A Microscope is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Microscope {{ id }}?"
+      },
+      "detail": {
+        "title": "Microscope"
+      },
+      "name": "Name",
+      "microscopePicture": "Microscope Picture",
+      "rock": "Rock"
+    }
+  }
+}
