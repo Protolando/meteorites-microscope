@@ -1,0 +1,67 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="meteoritesMicroscopeApp.microscope.home.title">Microscopes</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-microscope" [routerLink]="['/microscope/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="meteoritesMicroscopeApp.microscope.home.createLabel">
+            Create a new Microscope
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="microscopes?.length === 0">
+        <span jhiTranslate="meteoritesMicroscopeApp.microscope.home.notFound">No microscopes found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="microscopes && microscopes.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="meteoritesMicroscopeApp.microscope.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="rock.id"><span jhiTranslate="meteoritesMicroscopeApp.microscope.rock">Rock</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let microscope of microscopes ;trackBy: trackId">
+                    <td><a [routerLink]="['/microscope', microscope.id, 'view']">{{ microscope.id }}</a></td>
+                    <td>{{ microscope.name }}</td>
+                    <td>
+                        <div *ngIf="microscope.rock">
+                            <a [routerLink]="['/rock', microscope.rock?.id, 'view']" >{{ microscope.rock?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/microscope', microscope.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/microscope', microscope.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(microscope)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

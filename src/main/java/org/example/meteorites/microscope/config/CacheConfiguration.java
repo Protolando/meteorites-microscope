@@ -47,6 +47,11 @@ public class CacheConfiguration {
             createCache(cm, org.example.meteorites.microscope.domain.User.class.getName());
             createCache(cm, org.example.meteorites.microscope.domain.Authority.class.getName());
             createCache(cm, org.example.meteorites.microscope.domain.User.class.getName() + ".authorities");
+            createCache(cm, org.example.meteorites.microscope.domain.Rock.class.getName());
+            createCache(cm, org.example.meteorites.microscope.domain.Rock.class.getName() + ".microscopes");
+            createCache(cm, org.example.meteorites.microscope.domain.Microscope.class.getName());
+            createCache(cm, org.example.meteorites.microscope.domain.Microscope.class.getName() + ".microscopePictures");
+            createCache(cm, org.example.meteorites.microscope.domain.MicroscopePicture.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

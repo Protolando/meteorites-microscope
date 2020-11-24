@@ -1,0 +1,65 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="meteoritesMicroscopeApp.rock.home.title">Rocks</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-rock" [routerLink]="['/rock/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="meteoritesMicroscopeApp.rock.home.createLabel">
+            Create a new Rock
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="rocks?.length === 0">
+        <span jhiTranslate="meteoritesMicroscopeApp.rock.home.notFound">No rocks found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="rocks && rocks.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="meteoritesMicroscopeApp.rock.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="desc"><span jhiTranslate="meteoritesMicroscopeApp.rock.desc">Desc</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="picturePath"><span jhiTranslate="meteoritesMicroscopeApp.rock.picturePath">Picture Path</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let rock of rocks ;trackBy: trackId">
+                    <td><a [routerLink]="['/rock', rock.id, 'view']">{{ rock.id }}</a></td>
+                    <td>{{ rock.name }}</td>
+                    <td>{{ rock.desc }}</td>
+                    <td>{{ rock.picturePath }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/rock', rock.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/rock', rock.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(rock)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

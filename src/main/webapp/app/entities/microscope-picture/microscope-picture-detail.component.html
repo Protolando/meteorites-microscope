@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="microscopePicture">
+            <h2><span jhiTranslate="meteoritesMicroscopeApp.microscopePicture.detail.title">Microscope Picture</span> {{ microscopePicture.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="meteoritesMicroscopeApp.microscopePicture.path">Path</span></dt>
+                <dd>
+                    <span>{{ microscopePicture.path }}</span>
+                </dd>
+                <dt><span jhiTranslate="meteoritesMicroscopeApp.microscopePicture.name">Name</span></dt>
+                <dd>
+                    <span>{{ microscopePicture.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="meteoritesMicroscopeApp.microscopePicture.desc">Desc</span></dt>
+                <dd>
+                    <span>{{ microscopePicture.desc }}</span>
+                </dd>
+                <dt><span jhiTranslate="meteoritesMicroscopeApp.microscopePicture.order">Order</span></dt>
+                <dd>
+                    <span>{{ microscopePicture.order }}</span>
+                </dd>
+                <dt><span jhiTranslate="meteoritesMicroscopeApp.microscopePicture.microscope">Microscope</span></dt>
+                <dd>
+                    <div *ngIf="microscopePicture.microscope">
+                        <a [routerLink]="['/microscope', microscopePicture.microscope?.id, 'view']">{{ microscopePicture.microscope?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/microscope-picture', microscopePicture.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

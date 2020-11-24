@@ -1,0 +1,73 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="meteoritesMicroscopeApp.microscopePicture.home.title">Microscope Pictures</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-microscope-picture" [routerLink]="['/microscope-picture/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="meteoritesMicroscopeApp.microscopePicture.home.createLabel">
+            Create a new Microscope Picture
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="microscopePictures?.length === 0">
+        <span jhiTranslate="meteoritesMicroscopeApp.microscopePicture.home.notFound">No microscopePictures found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="microscopePictures && microscopePictures.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="path"><span jhiTranslate="meteoritesMicroscopeApp.microscopePicture.path">Path</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="meteoritesMicroscopeApp.microscopePicture.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="desc"><span jhiTranslate="meteoritesMicroscopeApp.microscopePicture.desc">Desc</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="order"><span jhiTranslate="meteoritesMicroscopeApp.microscopePicture.order">Order</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="microscope.id"><span jhiTranslate="meteoritesMicroscopeApp.microscopePicture.microscope">Microscope</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let microscopePicture of microscopePictures ;trackBy: trackId">
+                    <td><a [routerLink]="['/microscope-picture', microscopePicture.id, 'view']">{{ microscopePicture.id }}</a></td>
+                    <td>{{ microscopePicture.path }}</td>
+                    <td>{{ microscopePicture.name }}</td>
+                    <td>{{ microscopePicture.desc }}</td>
+                    <td>{{ microscopePicture.order }}</td>
+                    <td>
+                        <div *ngIf="microscopePicture.microscope">
+                            <a [routerLink]="['/microscope', microscopePicture.microscope?.id, 'view']" >{{ microscopePicture.microscope?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/microscope-picture', microscopePicture.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/microscope-picture', microscopePicture.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(microscopePicture)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

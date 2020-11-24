@@ -1,0 +1,41 @@
+{
+  "name": "MicroscopePicture",
+  "fields": [
+    {
+      "fieldName": "path",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "desc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "order",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "microscope",
+      "otherEntityRelationshipName": "microscopePicture",
+      "relationshipName": "microscope",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201124190155",
+  "entityTableName": "microscope_picture",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

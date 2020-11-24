@@ -1,0 +1,31 @@
+entity Rock {
+	name String,
+    desc String,
+    picturePath String
+}
+
+entity Microscope {
+	name String
+}
+
+entity MicroscopePicture {
+	path String,
+    name String,
+    desc String,
+    order Integer
+}
+
+relationship OneToMany{
+	Rock{microscope} to Microscope{rock}
+}
+
+relationship OneToMany{
+	Microscope{microscopePicture} to MicroscopePicture{microscope}
+}
+
+// Set pagination options
+paginate * with infinite-scroll
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
